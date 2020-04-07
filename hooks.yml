@@ -1,0 +1,6 @@
+---
+    hooks:
+      - name: Membership hook
+        resource: "memberships"
+        event: "created"
+        target_url: "{{ remote_prefix }}/webhook/membership"
