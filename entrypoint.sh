@@ -3,7 +3,7 @@
 python -m config_templater
 
 # Create webhooks (see: https://github.com/CiscoSE/webhooksimple)
-#python -m webhooksimple sync
+python -m webhooksimple setup
 
 # Run gunicorn
 gunicorn --bind 0.0.0.0:5000 bot:app

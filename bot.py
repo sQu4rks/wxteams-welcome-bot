@@ -45,13 +45,6 @@ def make_card(person_id, name, event_space):
 def alive():
     return "I am up!"
 
-@app.route('/webhook/message', methods=['POST'])
-def webhook_message():
-    raw_json = request.get_json()
-
-    api.messages.create(toPersonEmail=raw_json['data']['personEmail'], markdown="Pong")
-
-    return jsonify({'success': True})
 
 @app.route("/webhook/membership", methods=['POST'])
 def webhook_membership():
