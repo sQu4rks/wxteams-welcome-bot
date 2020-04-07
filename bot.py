@@ -23,7 +23,7 @@ House Rules 📜
 🙊 The Code of Conduct includes rules of not using the @all command, creating new Spaces, adding bots and users to the Spaces.
 """
 
-def make_card(person_id, name, event_space):
+def make_card(name):
     card_body = []
 
     logo = Image("https://gist.githubusercontent.com/sQu4rks/82ce8e2f0aa9f37413b7913fc1c0487b/raw/3152f2158c8b99e114ae0803a921b1ff26c15709/welcome-banner.jpg")
@@ -57,12 +57,8 @@ def webhook_membership():
     if space.type == "group":
         fmt_msg = MESSAGE.format(name=member_name, event_space=space.title)
 
-        print("Sending notification to {} from {}".format(raw_json['data']['personEmail'], space.title))
-
         if not api.people.me().id == raw_json['data']['personId']:
-            api.messages.create(toPersonEmail=raw_json['data']['personEmail'], markdown=fmt_msg, attachments=[make_card(member_id, member_name, space.title)])
-    else:
-        print("Not a group space. skipping")
+            api.messages.create(toPersonEmail=raw_json['data']['personEmail'], markdown=fmt_msg, attachments=[make_card(member_name)])
 
     return jsonify({"success": True})
 
