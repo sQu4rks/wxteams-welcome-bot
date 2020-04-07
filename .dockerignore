@@ -1,0 +1,4 @@
+vars.yml
+.DS_Store
+.gitignore
+docker-compose.yml
