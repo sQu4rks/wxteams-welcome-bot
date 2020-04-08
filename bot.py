@@ -41,21 +41,16 @@ def make_card(name):
 
     return attachment
 
-@app.route('/alive')
-def alive():
-    return "I am up!"
-
 
 @app.route("/webhook/membership", methods=['POST'])
 def webhook_membership():
     raw_json = request.get_json()
 
     member_name = raw_json['data']['personDisplayName']
-    member_id = raw_json['data']['personId']
     space = api.rooms.get(raw_json['data']['roomId'])
 
     if space.type == "group":
-        fmt_msg = MESSAGE.format(name=member_name, event_space=space.title)
+        fmt_msg = MESSAGE.format(name=member_name)
 
         if not api.people.me().id == raw_json['data']['personId']:
             api.messages.create(toPersonEmail=raw_json['data']['personEmail'], markdown=fmt_msg, attachments=[make_card(member_name)])
